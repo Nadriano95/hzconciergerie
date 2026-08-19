@@ -105,9 +105,8 @@
     <h1>Votre arrivée, <em style="color:var(--accent); font-style:italic;">organisée en un formulaire</em>.</h1>
     <p class="lead">Renseignez les détails de votre séjour — nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
 
-    <form name="reservation" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="resa-form">
-      <input type="hidden" name="form-name" value="reservation" />
-      <p style="display:none;"><label>Ne pas remplir : <input name="bot-field" /></label></p>
+    <form action="https://formspree.io/f/mqpzwbor" method="POST" id="resa-form">
+      <p style="display:none;"><label>Ne pas remplir : <input name="_gotcha" /></label></p>
 
       <div class="row">
         <div>
@@ -234,14 +233,18 @@
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     const data = new FormData(form);
-    fetch('/', {
+    fetch(form.action, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString()
+      headers: { 'Accept': 'application/json' },
+      body: data
     })
-      .then(() => {
-        document.getElementById('form-block').style.display = 'none';
-        document.getElementById('success').classList.add('show');
+      .then((response) => {
+        if (response.ok) {
+          document.getElementById('form-block').style.display = 'none';
+          document.getElementById('success').classList.add('show');
+        } else {
+          alert("Une erreur est survenue. Vous pouvez aussi nous écrire directement par email.");
+        }
       })
       .catch(() => {
         alert("Une erreur est survenue. Vous pouvez aussi nous écrire directement par email.");
