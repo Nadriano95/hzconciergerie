@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="noir">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HZ Conciergerie — Obtenir mon devis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --serif:'Fraunces',serif; --sans:'Manrope',sans-serif; }
+  html[data-theme="noir"] { --bg:#0B0B0C; --text:#F4F1EA; --muted:#948E82; --accent:#C9A867; --line:rgba(244,241,234,0.16); --field-bg:rgba(244,241,234,0.04); }
+  html[data-theme="ivoire"] { --bg:#F5F2EC; --text:#171613; --muted:#85796A; --accent:#8C7A5A; --line:rgba(23,22,19,0.16); --field-bg:rgba(23,22,19,0.03); }
+  html[data-theme="anthracite"] { --bg:#29282B; --text:#EDEAE3; --muted:#9C958A; --accent:#B0754F; --line:rgba(237,234,227,0.16); --field-bg:rgba(237,234,227,0.04); }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--text); font-family:var(--sans); font-weight:300;
+    padding:100px 24px 100px;
+  }
+  #theme-switch { position:fixed; top:28px; right:28px; display:flex; gap:10px; z-index:50; }
+  #theme-switch button { width:16px; height:16px; border-radius:50%; border:1px solid var(--line); cursor:pointer; padding:0; }
+  #theme-switch button.active { box-shadow:0 0 0 2px var(--bg), 0 0 0 3px var(--accent); }
+  #theme-switch button[data-t="noir"]{ background:#0B0B0C; }
+  #theme-switch button[data-t="ivoire"]{ background:#F5F2EC; }
+  #theme-switch button[data-t="anthracite"]{ background:#29282B; }
+
+  .wrap { max-width:640px; margin:0 auto; }
+  a.back { font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); text-decoration:none; display:inline-block; margin-bottom:50px; }
+  a.back:hover { color:var(--accent); }
+
+  .eyebrow { font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; }
+  h1 { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(28px,4.5vw,42px); line-height:1.3; margin-bottom:18px; }
+  p.lead { font-size:15px; line-height:1.8; color:var(--muted); max-width:480px; margin-bottom:56px; }
+
+  form { display:flex; flex-direction:column; gap:26px; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:560px){ .row{ grid-template-columns:1fr; } }
+
+  label {
+    display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:10px;
+  }
+  input, select, textarea {
+    width:100%; background:var(--field-bg); border:1px solid var(--line);
+    color:var(--text); font-family:var(--sans); font-size:15px;
+    padding:14px 16px; outline:none; transition:border-color .25s ease;
+  }
+  input:focus, select:focus, textarea:focus { border-color:var(--accent); }
+  textarea { resize:vertical; min-height:100px; }
+  ::placeholder { color:var(--muted); opacity:0.6; }
+
+  .radio-group { display:flex; gap:14px; flex-wrap:wrap; }
+  .radio-option {
+    flex:1; min-width:180px; border:1px solid var(--line); padding:16px;
+    cursor:pointer; transition:border-color .25s ease;
+  }
+  .radio-option:has(input:checked) { border-color:var(--accent); }
+  .radio-option input { width:auto; margin-right:10px; accent-color:var(--accent); }
+  .radio-option .ro-title { font-size:14px; color:var(--text); }
+  .radio-option .ro-sub { font-size:12px; color:var(--muted); margin-top:4px; }
+
+  .check-group { display:flex; flex-direction:column; gap:12px; }
+  .check-option {
+    display:flex; align-items:center; gap:14px;
+    border:1px solid var(--line); padding:16px 18px;
+    cursor:pointer; transition:border-color .25s ease;
+  }
+  .check-option:has(input:checked) { border-color:var(--accent); }
+  .check-option input { width:auto; accent-color:var(--accent); flex-shrink:0; }
+  .check-option .co-title { font-size:14px; color:var(--text); }
+  .sub-field { margin-left:38px; margin-top:-2px; }
+
+  button[type="submit"] {
+    margin-top:12px; align-self:flex-start;
+    background:var(--accent); color:var(--bg); border:none;
+    font-family:var(--sans); font-weight:600; font-size:12px;
+    letter-spacing:0.18em; text-transform:uppercase;
+    padding:18px 44px; cursor:pointer; transition:opacity .25s ease;
+  }
+  button[type="submit"]:hover { opacity:0.85; }
+
+  .form-note { font-size:12px; color:var(--muted); margin-top:18px; line-height:1.7; }
+
+  #success {
+    display:none; text-align:center; padding:80px 20px;
+  }
+  #success.show { display:block; }
+  #success h2 { font-family:var(--serif); font-style:italic; font-weight:300; font-size:32px; margin-bottom:16px; }
+  #success p { color:var(--muted); font-size:15px; max-width:420px; margin:0 auto; }
+</style>
+</head>
+<body>
+
+<div id="theme-switch">
+  <button data-t="noir" class="active"></button>
+  <button data-t="ivoire"></button>
+  <button data-t="anthracite"></button>
+</div>
+
+<div class="wrap">
+  <a class="back" href="index.html">← Retour au site</a>
+
+  <div id="form-block">
+    <div class="eyebrow">Obtenir mon devis</div>
+    <h1>Votre arrivée, <em style="color:var(--accent); font-style:italic;">organisée en un formulaire</em>.</h1>
+    <p class="lead">Renseignez les détails de votre séjour — nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
+
+    <form name="reservation" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="resa-form">
+      <input type="hidden" name="form-name" value="reservation" />
+      <p style="display:none;"><label>Ne pas remplir : <input name="bot-field" /></label></p>
+
+      <div class="row">
+        <div>
+          <label for="nom">Nom complet</label>
+          <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+        </div>
+        <div>
+          <label for="telephone">Téléphone / WhatsApp</label>
+          <input type="tel" id="telephone" name="telephone" placeholder="+33 6 XX XX XX XX" required>
+        </div>
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="vous@email.com" required>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="date_arrivee">Date d'arrivée</label>
+          <input type="date" id="date_arrivee" name="date_arrivee" required>
+        </div>
+        <div>
+          <label for="vol">Numéro de vol (si connu)</label>
+          <input type="text" id="vol" name="vol" placeholder="Ex. KQ 412">
+        </div>
+      </div>
+
+      <div>
+        <label>De quoi avez-vous besoin ?</label>
+        <div class="check-group">
+          <label class="check-option">
+            <input type="checkbox" name="services[]" value="Billet d'avion">
+            <span class="co-title">Billet d'avion</span>
+          </label>
+
+          <label class="check-option">
+            <input type="checkbox" name="services[]" value="Location de voiture" id="check-voiture">
+            <span class="co-title">Location de voiture</span>
+          </label>
+          <div class="sub-field">
+            <select id="type_vehicule" name="type_vehicule">
+              <option value="">Type de véhicule — à préciser</option>
+              <option value="Citadine">Citadine</option>
+              <option value="4x4">4x4</option>
+              <option value="Viano">Viano (avec chauffeur)</option>
+            </select>
+          </div>
+
+          <label class="check-option">
+            <input type="checkbox" name="services[]" value="Activité">
+            <span class="co-title">Activité</span>
+          </label>
+
+          <label class="check-option">
+            <input type="checkbox" name="services[]" value="Hôtel">
+            <span class="co-title">Hôtel</span>
+          </label>
+
+          <label class="check-option">
+            <input type="checkbox" name="services[]" value="Transfert" id="check-transfert">
+            <span class="co-title">Transfert</span>
+          </label>
+
+          <label class="check-option">
+            <input type="checkbox" name="services[]" value="Bien à distance">
+            <span class="co-title">Bien à distance</span>
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <label>Besoins spécifiques</label>
+        <div class="check-group">
+          <label class="check-option">
+            <input type="checkbox" name="equipements[]" value="Siège auto bébé">
+            <span class="co-title">Siège auto bébé</span>
+          </label>
+          <label class="check-option">
+            <input type="checkbox" name="equipements[]" value="Fauteuil roulant">
+            <span class="co-title">Fauteuil roulant</span>
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <label for="hebergement">Adresse d'arrivée (hôtel, Airbnb ou logement personnel)</label>
+        <input type="text" id="hebergement" name="hebergement" placeholder="Nom et adresse de votre logement, n'importe où dans le pays">
+      </div>
+
+      <div>
+        <label for="personnes">Nombre de personnes</label>
+        <input type="number" id="personnes" name="personnes" min="1" value="1" required>
+      </div>
+      <p class="form-note" style="margin-top:-10px;">Besoin non listé ici ? Écrivez-nous directement à <a href="mailto:contact@hzconciergerie.com" style="color:var(--accent);">contact@hzconciergerie.com</a>.</p>
+
+      <div>
+        <label for="message">Précisions utiles (optionnel)</label>
+        <textarea id="message" name="message" placeholder="Horaires particuliers, nombre de bagages, demandes spécifiques..."></textarea>
+      </div>
+
+      <button type="submit">Envoyer la demande</button>
+      <p class="form-note">Nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
+    </form>
+  </div>
+
+  <div id="success">
+    <h2>Demande envoyée</h2>
+    <p>Merci — nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
+  </div>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('#theme-switch button');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.documentElement.setAttribute('data-theme', btn.dataset.t);
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  const form = document.getElementById('resa-form');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString()
+    })
+      .then(() => {
+        document.getElementById('form-block').style.display = 'none';
+        document.getElementById('success').classList.add('show');
+      })
+      .catch(() => {
+        alert("Une erreur est survenue. Vous pouvez aussi nous écrire directement par email.");
+      });
+  });
+</script>
+
+</body>
+</html>
