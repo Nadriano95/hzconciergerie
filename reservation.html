@@ -105,7 +105,7 @@
     <h1>Votre arrivée, <em style="color:var(--accent); font-style:italic;">organisée en un formulaire</em>.</h1>
     <p class="lead">Renseignez les détails de votre séjour — nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
 
-    <form action="https://formspree.io/f/mgawdkqj" method="POST" id="resa-form">
+    <form action="https://script.google.com/macros/s/AKfycbyCN7NjcOBYweq_Qcjim3dMfZdlAK-YR0w-0_2r5aE3X0wCQc9GKu0CVg3xEDLxvatJfA/exec" method="POST" id="resa-form">
       <p style="display:none;"><label>Ne pas remplir : <input name="_gotcha" /></label></p>
 
       <div class="row">
@@ -235,16 +235,14 @@
     const data = new FormData(form);
     fetch(form.action, {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
+      mode: 'no-cors',
       body: data
     })
-      .then((response) => {
-        if (response.ok) {
-          document.getElementById('form-block').style.display = 'none';
-          document.getElementById('success').classList.add('show');
-        } else {
-          alert("Une erreur est survenue. Vous pouvez aussi nous écrire directement par email.");
-        }
+      .then(() => {
+        // En mode no-cors, la réponse n'est pas lisible — on affiche le succès
+        // dès que la requête est partie, ce qui est le comportement attendu ici.
+        document.getElementById('form-block').style.display = 'none';
+        document.getElementById('success').classList.add('show');
       })
       .catch(() => {
         alert("Une erreur est survenue. Vous pouvez aussi nous écrire directement par email.");
