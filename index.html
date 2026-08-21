@@ -77,6 +77,19 @@
     display:flex; gap:10px; z-index:50;
     align-items:center;
   }
+  #lang-switch {
+    position:fixed; top:28px; right:150px;
+    display:flex; gap:8px; z-index:50;
+    align-items:center;
+    font-family:var(--sans); font-size:11px; letter-spacing:0.1em;
+  }
+  #lang-switch button {
+    background:none; border:none; cursor:pointer; padding:2px 4px;
+    color:var(--muted); font-family:var(--sans); font-size:11px; letter-spacing:0.1em;
+    transition:color .3s ease;
+  }
+  #lang-switch button.active { color:var(--accent); font-weight:600; }
+  @media (max-width:820px){ #lang-switch{ top:auto; bottom:20px; right:90px; } }
   #theme-switch button {
     width:16px; height:16px; border-radius:50%;
     border:1px solid var(--line-strong);
@@ -465,6 +478,12 @@
   <button data-t="anthracite" aria-label="Palette anthracite bronze"></button>
 </div>
 
+<div id="lang-switch">
+  <button data-lang="fr" class="active">FR</button>
+  <span style="color:var(--line);">/</span>
+  <button data-lang="en">EN</button>
+</div>
+
 <nav>
   <div class="nav-brand-group">
     <svg class="nav-mark" viewBox="0 0 235 200" xmlns="http://www.w3.org/2000/svg">
@@ -480,13 +499,13 @@
     <div class="brand">HZ CONCIERGERIE</div>
   </div>
   <ul>
-    <li><a href="#depart">Avant votre départ</a></li>
-    <li><a href="#arrivee">Arrivée</a></li>
-    <li><a href="#hebergement">Hébergement</a></li>
-        <li><a href="#location">Location de véhicule</a></li>
-    <li><a href="#bien">Bien à distance</a></li>
-    <li><a href="#activites">Activités</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#depart" data-en="Before you leave">Avant votre départ</a></li>
+    <li><a href="#arrivee" data-en="Arrival">Arrivée</a></li>
+    <li><a href="#hebergement" data-en="Accommodation">Hébergement</a></li>
+        <li><a href="#location" data-en="Vehicle rental">Location de véhicule</a></li>
+    <li><a href="#bien" data-en="Remote property care">Bien à distance</a></li>
+    <li><a href="#activites" data-en="Activities">Activités</a></li>
+    <li><a href="#contact" data-en="Contact">Contact</a></li>
   </ul>
   <button id="nav-burger" aria-label="Ouvrir le menu">
     <span></span><span></span><span></span>
@@ -495,13 +514,13 @@
 
 <div id="mobile-nav">
   <ul>
-    <li><a href="#depart">Avant votre départ</a></li>
-    <li><a href="#arrivee">Arrivée</a></li>
-    <li><a href="#hebergement">Hébergement</a></li>
-        <li><a href="#location">Location de véhicule</a></li>
-    <li><a href="#bien">Bien à distance</a></li>
-    <li><a href="#activites">Activités</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#depart" data-en="Before you leave">Avant votre départ</a></li>
+    <li><a href="#arrivee" data-en="Arrival">Arrivée</a></li>
+    <li><a href="#hebergement" data-en="Accommodation">Hébergement</a></li>
+        <li><a href="#location" data-en="Vehicle rental">Location de véhicule</a></li>
+    <li><a href="#bien" data-en="Remote property care">Bien à distance</a></li>
+    <li><a href="#activites" data-en="Activities">Activités</a></li>
+    <li><a href="#contact" data-en="Contact">Contact</a></li>
   </ul>
 </div>
 
@@ -517,101 +536,101 @@
       <line class="accent" x1="215" y1="20" x2="125" y2="180"/>
     </g>
   </svg>
-  <div class="logo-sub">Conciergerie privée</div>
-  <p class="hero-tagline">Le premier instant de votre séjour ne s'improvise pas.<br>Nous nous en occupons, avant même que vous ayez atterri.</p>
-  <a href="reservation.html" class="hero-cta">Obtenir mon devis</a>
-  <div class="hero-scroll">Découvrir</div>
+  <div class="logo-sub" data-en="Private concierge">Conciergerie privée</div>
+  <p class="hero-tagline" data-en-html="The first moment of your stay is never left to chance.<br>We take care of it, before you've even landed.">Le premier instant de votre séjour ne s'improvise pas.<br>Nous nous en occupons, avant même que vous ayez atterri.</p>
+  <a href="reservation.html" class="hero-cta" data-en="Get my quote">Obtenir mon devis</a>
+  <div class="hero-scroll" data-en="Discover">Découvrir</div>
 </section>
 
 <section id="intro">
-  <p class="reveal">HZ Conciergerie ne vend pas de prestations, mais l'absence de friction. <em>Ce que vous ne verrez jamais</em> — parce que nous l'aurons réglé avant vous.</p>
+  <p class="reveal" data-en-html="HZ Conciergerie doesn't sell services — it sells the absence of friction. <em>What you'll never see</em> — because we'll have taken care of it before you did.">HZ Conciergerie ne vend pas de prestations, mais l'absence de friction. <em>Ce que vous ne verrez jamais</em> — parce que nous l'aurons réglé avant vous.</p>
 </section>
 
 <section class="service" id="depart">
-  <div class="eyebrow">Avant votre départ</div>
+  <div class="eyebrow" data-en="Before you leave">Avant votre départ</div>
   <div>
-    <h3 class="reveal">Votre billet, <em>cherché pour vous</em>.</h3>
-    <p class="reveal">Recherche personnalisée de votre billet d'avion — meilleures dates, meilleurs prix, meilleures correspondances. Nous nous en occupons avant même que votre voyage ne commence.</p>
-    <p class="reveal" style="margin-top:16px;">En partenariat avec une agence de voyage, pour un accès direct aux meilleures options.</p>
+    <h3 class="reveal" data-en-html="Your ticket, <em>found for you</em>.">Votre billet, <em>cherché pour vous</em>.</h3>
+    <p class="reveal" data-en="Personalised search for your plane ticket — best dates, best prices, best connections. We take care of it before your trip even begins.">Recherche personnalisée de votre billet d'avion — meilleures dates, meilleurs prix, meilleures correspondances. Nous nous en occupons avant même que votre voyage ne commence.</p>
+    <p class="reveal" style="margin-top:16px;" data-en="In partnership with a travel agency, for direct access to the best options.">En partenariat avec une agence de voyage, pour un accès direct aux meilleures options.</p>
     <div class="contact-links">
-      <a href="mailto:contact@hzconciergerie.com" class="quote-tag">Nous écrire par email</a>
-      <a href="https://wa.me/33600000000" class="quote-tag">Nous écrire sur WhatsApp</a>
+      <a href="mailto:contact@hzconciergerie.com" class="quote-tag" data-en="Email us">Nous écrire par email</a>
+      <a href="https://wa.me/33600000000" class="quote-tag" data-en="Message us on WhatsApp">Nous écrire sur WhatsApp</a>
     </div>
   </div>
 </section>
 
 <section class="service" id="arrivee">
-  <div class="eyebrow">Arrivée</div>
+  <div class="eyebrow" data-en="Arrival">Arrivée</div>
   <div>
-    <h3 class="reveal">Chaque vol, <em>anticipé</em>.</h3>
-    <p class="reveal">Nous suivons votre vol en temps réel, nous vous attendons à la sortie avec une pancarte à votre nom, et nous vous conduisons directement vers votre hôtel, votre Airbnb ou votre logement personnel.</p>
-    <p class="reveal" style="margin-top:16px;">Nous vous déposons partout dans le pays, pas seulement à Moroni.</p>
-    <p class="reveal" style="margin-top:20px;"><strong style="color:var(--text); font-weight:500;">Transfert Moroni</strong> — 1 à 2 personnes, ou 3 à 5 personnes.<br><strong style="color:var(--text); font-weight:500;">Assistance locale</strong> — sur devis.</p>
+    <h3 class="reveal" data-en-html="Every flight, <em>anticipated</em>.">Chaque vol, <em>anticipé</em>.</h3>
+    <p class="reveal" data-en="We track your flight in real time, meet you at arrivals with a sign bearing your name, and drive you straight to your hotel, Airbnb or personal home.">Nous suivons votre vol en temps réel, nous vous attendons à la sortie avec une pancarte à votre nom, et nous vous conduisons directement vers votre hôtel, votre Airbnb ou votre logement personnel.</p>
+    <p class="reveal" style="margin-top:16px;" data-en="We can drop you off anywhere in the country, not just Moroni.">Nous vous déposons partout dans le pays, pas seulement à Moroni.</p>
+    <p class="reveal" style="margin-top:20px;" data-en-html="<strong style='color:var(--text); font-weight:500;'>Moroni Transfer</strong> — 1 to 2 people, or 3 to 5 people.<br><strong style='color:var(--text); font-weight:500;'>Local assistance</strong> — quote on request."><strong style="color:var(--text); font-weight:500;">Transfert Moroni</strong> — 1 à 2 personnes, ou 3 à 5 personnes.<br><strong style="color:var(--text); font-weight:500;">Assistance locale</strong> — sur devis.</p>
     <div class="contact-links">
-      <a href="mailto:contact@hzconciergerie.com" class="quote-tag">Nous écrire par email</a>
-      <a href="https://wa.me/33600000000" class="quote-tag">Nous écrire sur WhatsApp</a>
+      <a href="mailto:contact@hzconciergerie.com" class="quote-tag" data-en="Email us">Nous écrire par email</a>
+      <a href="https://wa.me/33600000000" class="quote-tag" data-en="Message us on WhatsApp">Nous écrire sur WhatsApp</a>
     </div>
   </div>
 </section>
 
 <section class="service" id="hebergement">
-  <div class="eyebrow">Hébergement</div>
+  <div class="eyebrow" data-en="Accommodation">Hébergement</div>
   <div>
-    <h3 class="reveal">Votre logement, <em>sans mauvaise surprise</em>.</h3>
-    <p class="reveal">Vous réservez votre hôtel ou votre Airbnb ; nous coordonnons l'arrivée avec l'établissement, confirmons les horaires, et restons votre point de contact si quelque chose doit être ajusté en cours de séjour.</p>
+    <h3 class="reveal" data-en-html="Your accommodation, <em>without the surprises</em>.">Votre logement, <em>sans mauvaise surprise</em>.</h3>
+    <p class="reveal" data-en="You book your hotel or Airbnb; we coordinate the arrival with the property, confirm the timings, and remain your point of contact if anything needs adjusting during your stay.">Vous réservez votre hôtel ou votre Airbnb ; nous coordonnons l'arrivée avec l'établissement, confirmons les horaires, et restons votre point de contact si quelque chose doit être ajusté en cours de séjour.</p>
     <div class="contact-links">
-      <a href="mailto:contact@hzconciergerie.com" class="quote-tag">Nous écrire par email</a>
-      <a href="https://wa.me/33600000000" class="quote-tag">Nous écrire sur WhatsApp</a>
+      <a href="mailto:contact@hzconciergerie.com" class="quote-tag" data-en="Email us">Nous écrire par email</a>
+      <a href="https://wa.me/33600000000" class="quote-tag" data-en="Message us on WhatsApp">Nous écrire sur WhatsApp</a>
     </div>
   </div>
 </section>
 
 <section class="service" id="location">
-  <div class="eyebrow">Location de véhicule</div>
+  <div class="eyebrow" data-en="Vehicle rental">Location de véhicule</div>
   <div>
-    <h3 class="reveal">Le véhicule qu'il vous faut, <em>sans que vous ayez à chercher</em>.</h3>
-    <p class="reveal">Citadine, 4x4, Viano (avec chauffeur) ou autre — quel que soit le type de véhicule recherché, nous nous chargeons de la recherche, de la réservation et de la coordination avec l'agence locale. Vous nous dites ce dont vous avez besoin, on s'occupe du reste.</p>
-    <p class="reveal" style="margin-top:16px;">Siège auto bébé disponible sur demande.</p>
+    <h3 class="reveal" data-en-html="The vehicle you need, <em>without the search</em>.">Le véhicule qu'il vous faut, <em>sans que vous ayez à chercher</em>.</h3>
+    <p class="reveal" data-en="City car, 4x4, or anything else — whatever type of vehicle you need, we handle the search, the booking and the coordination with the local agency. You tell us what you need, we take care of the rest.">Citadine, 4x4, Viano (avec chauffeur) ou autre — quel que soit le type de véhicule recherché, nous nous chargeons de la recherche, de la réservation et de la coordination avec l'agence locale. Vous nous dites ce dont vous avez besoin, on s'occupe du reste.</p>
+    <p class="reveal" style="margin-top:16px;" data-en="Baby car seat available on request.">Siège auto bébé disponible sur demande.</p>
     <div class="contact-links">
-      <a href="mailto:contact@hzconciergerie.com" class="quote-tag">Nous écrire par email</a>
-      <a href="https://wa.me/33600000000" class="quote-tag">Nous écrire sur WhatsApp</a>
+      <a href="mailto:contact@hzconciergerie.com" class="quote-tag" data-en="Email us">Nous écrire par email</a>
+      <a href="https://wa.me/33600000000" class="quote-tag" data-en="Message us on WhatsApp">Nous écrire sur WhatsApp</a>
     </div>
   </div>
 </section>
 
 <section class="service" id="bien">
-  <div class="eyebrow">Bien à distance</div>
+  <div class="eyebrow" data-en="Remote property care">Bien à distance</div>
   <div>
-    <h3 class="reveal">Votre tranquillité, <em>même à distance</em>.</h3>
-    <p class="reveal">Pensé pour la diaspora : nous ouvrons et vérifions le logement en votre absence, ou nous le préparons avant votre arrivée. Paiement des factures locales sur mandat, coordination de petits travaux. Un rapport après chaque passage, pour ne jamais gérer à l'aveugle depuis l'étranger.</p>
-    <p class="reveal" style="margin-top:16px;">Nous nous occupons aussi du gardiennage de votre véhicule en votre absence : nettoyage et surveillance réguliers pendant toute la durée de votre séjour à l'étranger.</p>
-    <p class="reveal" style="margin-top:20px;"><strong style="color:var(--text); font-weight:500;">Formule mensuelle</strong> — une ouverture et vérification du logement chaque mois.<br><strong style="color:var(--text); font-weight:500;">Formule bimestrielle</strong> — une ouverture et vérification tous les deux mois.</p>
+    <h3 class="reveal" data-en-html="Your peace of mind, <em>even from afar</em>.">Votre tranquillité, <em>même à distance</em>.</h3>
+    <p class="reveal" data-en="Designed for the diaspora: we open and check your property while you're away, or prepare it ahead of your arrival. Local bills paid on your behalf, minor repairs coordinated. A report after every visit, so you're never managing things blind from abroad.">Pensé pour la diaspora : nous ouvrons et vérifions le logement en votre absence, ou nous le préparons avant votre arrivée. Paiement des factures locales sur mandat, coordination de petits travaux. Un rapport après chaque passage, pour ne jamais gérer à l'aveugle depuis l'étranger.</p>
+    <p class="reveal" style="margin-top:16px;" data-en="We also look after your vehicle while you're away: regular cleaning and monitoring for as long as you're abroad.">Nous nous occupons aussi du gardiennage de votre véhicule en votre absence : nettoyage et surveillance réguliers pendant toute la durée de votre séjour à l'étranger.</p>
+    <p class="reveal" style="margin-top:20px;" data-en-html="<strong style='color:var(--text); font-weight:500;'>Monthly plan</strong> — one visit and check of the property each month.<br><strong style='color:var(--text); font-weight:500;'>Bi-monthly plan</strong> — one visit and check every two months."><strong style="color:var(--text); font-weight:500;">Formule mensuelle</strong> — une ouverture et vérification du logement chaque mois.<br><strong style="color:var(--text); font-weight:500;">Formule bimestrielle</strong> — une ouverture et vérification tous les deux mois.</p>
     <div class="contact-links">
-      <a href="mailto:contact@hzconciergerie.com" class="quote-tag">Nous écrire par email</a>
-      <a href="https://wa.me/33600000000" class="quote-tag">Nous écrire sur WhatsApp</a>
+      <a href="mailto:contact@hzconciergerie.com" class="quote-tag" data-en="Email us">Nous écrire par email</a>
+      <a href="https://wa.me/33600000000" class="quote-tag" data-en="Message us on WhatsApp">Nous écrire sur WhatsApp</a>
     </div>
   </div>
 </section>
 
 <section class="service" id="activites">
-  <div class="eyebrow">Activités</div>
+  <div class="eyebrow" data-en="Activities">Activités</div>
   <div>
-    <h3 class="reveal">Ce que vous ferez sur place, <em>entre de bonnes mains</em>.</h3>
-    <p class="reveal">Excursions en mer, randonnées, sorties culturelles — nous vous mettons en relation avec des partenaires locaux de confiance. Nous ne facturons rien dessus : c'est votre séjour, pas notre marge.</p>
+    <h3 class="reveal" data-en-html="What you'll do while you're there, <em>in good hands</em>.">Ce que vous ferez sur place, <em>entre de bonnes mains</em>.</h3>
+    <p class="reveal" data-en="Boat trips, hikes, cultural outings — we connect you with trusted local partners. We don't charge anything on top: it's your trip, not our margin.">Excursions en mer, randonnées, sorties culturelles — nous vous mettons en relation avec des partenaires locaux de confiance. Nous ne facturons rien dessus : c'est votre séjour, pas notre marge.</p>
     <div class="contact-links">
-      <a href="mailto:contact@hzconciergerie.com" class="quote-tag">Nous écrire par email</a>
-      <a href="https://wa.me/33600000000" class="quote-tag">Nous écrire sur WhatsApp</a>
+      <a href="mailto:contact@hzconciergerie.com" class="quote-tag" data-en="Email us">Nous écrire par email</a>
+      <a href="https://wa.me/33600000000" class="quote-tag" data-en="Message us on WhatsApp">Nous écrire sur WhatsApp</a>
     </div>
   </div>
 </section>
 
 <section id="team">
-  <span class="eyebrow">L'équipe</span>
-  <h3 class="reveal">Une équipe restreinte, <em>joignable à tout moment</em>. C'est le principe même de la discrétion : peu d'intermédiaires, une seule ligne directe.</h3>
+  <span class="eyebrow" data-en="The team">L'équipe</span>
+  <h3 class="reveal" data-en-html="A small team, <em>reachable at any time</em>. That's the whole point of discretion: few intermediaries, one direct line.">Une équipe restreinte, <em>joignable à tout moment</em>. C'est le principe même de la discrétion : peu d'intermédiaires, une seule ligne directe.</h3>
   <div class="team-row">
-    <div class="team-item"><strong>Conciergerie</strong>Un interlocuteur unique, quel que soit le fuseau horaire.</div>
-    <div class="team-item"><strong>Sourcing</strong>Un réseau construit sur des années, jamais improvisé au dernier moment.</div>
-    <div class="team-item"><strong>Confidentialité</strong>Aucun dossier partagé au-delà du strict nécessaire.</div>
+    <div class="team-item" data-en-html="<strong>Concierge</strong>One point of contact, whatever time zone you're in."><strong>Conciergerie</strong>Un interlocuteur unique, quel que soit le fuseau horaire.</div>
+    <div class="team-item" data-en-html="<strong>Sourcing</strong>A network built over years, never improvised at the last minute."><strong>Sourcing</strong>Un réseau construit sur des années, jamais improvisé au dernier moment.</div>
+    <div class="team-item" data-en-html="<strong>Confidentiality</strong>No file shared beyond what's strictly necessary."><strong>Confidentialité</strong>Aucun dossier partagé au-delà du strict nécessaire.</div>
   </div>
 </section>
 
@@ -634,12 +653,34 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>HZ Conciergerie — votre point de contact aux Comores</span>
+    <span data-en="HZ Conciergerie — your point of contact in the Comoros">HZ Conciergerie — votre point de contact aux Comores</span>
     <span>© MMXXVI</span>
   </div>
 </footer>
 
 <script>
+  // Language switcher
+  const langButtons = document.querySelectorAll('#lang-switch button');
+  function setLanguage(lang) {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      if (!el.dataset.frBackup) el.dataset.frBackup = el.textContent;
+      el.textContent = lang === 'en' ? el.dataset.en : el.dataset.frBackup;
+    });
+    document.querySelectorAll('[data-en-html]').forEach(el => {
+      if (!el.dataset.frBackupHtml) el.dataset.frBackupHtml = el.innerHTML;
+      el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.frBackupHtml;
+    });
+    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+      if (!el.dataset.frBackupPlaceholder) el.dataset.frBackupPlaceholder = el.placeholder;
+      el.placeholder = lang === 'en' ? el.dataset.enPlaceholder : el.dataset.frBackupPlaceholder;
+    });
+    document.documentElement.lang = lang;
+    langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  }
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
+
   // Theme switcher
   const buttons = document.querySelectorAll('#theme-switch button');
   buttons.forEach(btn => {
