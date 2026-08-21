@@ -18,6 +18,15 @@
     padding:100px 24px 100px;
   }
   #theme-switch { position:fixed; top:28px; right:28px; display:flex; gap:10px; z-index:50; }
+  #lang-switch {
+    position:fixed; top:28px; right:110px; display:flex; gap:8px; z-index:50;
+    align-items:center; font-family:var(--sans); font-size:11px; letter-spacing:0.1em;
+  }
+  #lang-switch button {
+    background:none; border:none; cursor:pointer; padding:2px 4px;
+    color:var(--muted); font-family:var(--sans); font-size:11px; letter-spacing:0.1em;
+  }
+  #lang-switch button.active { color:var(--accent); font-weight:600; }
   #theme-switch button { width:16px; height:16px; border-radius:50%; border:1px solid var(--line); cursor:pointer; padding:0; }
   #theme-switch button.active { box-shadow:0 0 0 2px var(--bg), 0 0 0 3px var(--accent); }
   #theme-switch button[data-t="noir"]{ background:#0B0B0C; }
@@ -104,164 +113,192 @@
   <button data-t="anthracite"></button>
 </div>
 
+<div id="lang-switch">
+  <button data-lang="fr" class="active">FR</button>
+  <span style="color:var(--line);">/</span>
+  <button data-lang="en">EN</button>
+</div>
+
 <div class="wrap">
-  <a class="back" href="index.html">← Retour au site</a>
+  <a class="back" href="index.html" data-en="← Back to site">← Retour au site</a>
 
   <div id="form-block">
-    <div class="eyebrow">Obtenir mon devis</div>
-    <h1>Votre arrivée, <em style="color:var(--accent); font-style:italic;">organisée en un formulaire</em>.</h1>
-    <p class="lead">Renseignez les détails de votre séjour — nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
+    <div class="eyebrow" data-en="Get my quote">Obtenir mon devis</div>
+    <h1 data-en-html="Your arrival, <em style='color:var(--accent); font-style:italic;'>organised in one form</em>.">Votre arrivée, <em style="color:var(--accent); font-style:italic;">organisée en un formulaire</em>.</h1>
+    <p class="lead" data-en="Fill in your trip details — we'll send you a quote as soon as possible, by email or WhatsApp.">Renseignez les détails de votre séjour — nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
 
     <form action="https://script.google.com/macros/s/AKfycbxTzuyifvfJltAs7ZV3OUExq45imczxXHaj5ZtE04jKuTFa9oKNnKUA442N411lQYasjA/exec" method="POST" id="resa-form">
       <p style="display:none;"><label>Ne pas remplir : <input name="_gotcha" /></label></p>
 
       <div class="row">
         <div>
-          <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+          <label for="prenom" data-en="First name">Prénom</label>
+          <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" data-en-placeholder="Your first name" required>
         </div>
         <div>
-          <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+          <label for="nom" data-en="Last name">Nom</label>
+          <input type="text" id="nom" name="nom" placeholder="Votre nom" data-en-placeholder="Your last name" required>
         </div>
       </div>
 
       <div class="row">
         <div>
-          <label for="telephone">Téléphone / WhatsApp</label>
+          <label for="telephone" data-en="Phone / WhatsApp">Téléphone / WhatsApp</label>
           <input type="tel" id="telephone" name="telephone" placeholder="+33 6 XX XX XX XX">
         </div>
         <div>
-          <label for="email">Email</label>
+          <label for="email" data-en="Email">Email</label>
           <input type="email" id="email" name="email" placeholder="vous@email.com">
         </div>
       </div>
-      <p class="contact-hint">Merci de renseigner au moins un moyen de contact (téléphone, WhatsApp ou email).</p>
-      <p class="field-error" id="error-contact">Indiquez au moins un téléphone, un WhatsApp ou un email pour qu'on puisse vous répondre.</p>
+      <p class="contact-hint" data-en="Please provide at least one way to reach you (phone, WhatsApp or email).">Merci de renseigner au moins un moyen de contact (téléphone, WhatsApp ou email).</p>
+      <p class="field-error" id="error-contact" data-en="Please provide a phone number, WhatsApp or email so we can get back to you.">Indiquez au moins un téléphone, un WhatsApp ou un email pour qu'on puisse vous répondre.</p>
 
       <div class="row">
         <div>
-          <label for="date_arrivee">Date d'arrivée</label>
+          <label for="date_arrivee" data-en="Arrival date">Date d'arrivée</label>
           <input type="date" id="date_arrivee" name="date_arrivee" required>
         </div>
         <div>
-          <label for="date_depart">Date de départ</label>
-          <input type="date" id="date_depart" name="date_depart" required>
+          <label for="date_depart" data-en="Departure date (optional)">Date de départ (optionnel)</label>
+          <input type="date" id="date_depart" name="date_depart">
         </div>
       </div>
 
       <div>
-        <label for="vol">Numéro de vol (si connu)</label>
-        <input type="text" id="vol" name="vol" placeholder="Ex. KQ 412">
+        <label for="vol" data-en="Flight number (if known)">Numéro de vol (si connu)</label>
+        <input type="text" id="vol" name="vol" placeholder="Ex. KQ 412" data-en-placeholder="e.g. KQ 412">
       </div>
 
       <div>
-        <label>De quoi avez-vous besoin ?</label>
+        <label data-en="What do you need?">De quoi avez-vous besoin ?</label>
         <div class="check-group">
           <label class="check-option">
             <input type="checkbox" name="services[]" value="Billet d'avion">
-            <span class="co-title">Billet d'avion</span>
+            <span class="co-title" data-en="Plane ticket">Billet d'avion</span>
           </label>
 
           <label class="check-option">
             <input type="checkbox" name="services[]" value="Location de voiture" id="check-voiture">
-            <span class="co-title">Location de voiture</span>
+            <span class="co-title" data-en="Car rental">Location de voiture</span>
           </label>
           <div class="sub-field">
             <select id="type_vehicule" name="type_vehicule">
-              <option value="">Type de véhicule — à préciser</option>
-              <option value="Citadine">Citadine</option>
+              <option value="" data-en="Vehicle type — please specify">Type de véhicule — à préciser</option>
+              <option value="Citadine" data-en="City car">Citadine</option>
               <option value="4x4">4x4</option>
             </select>
-            <p class="field-error" id="error-vehicule">Précisez le type de véhicule souhaité.</p>
+            <p class="field-error" id="error-vehicule" data-en="Please specify the type of vehicle you'd like.">Précisez le type de véhicule souhaité.</p>
             <div class="row" style="margin-top:10px;">
               <div>
-                <label for="location_debut" style="font-size:12px;">Location du</label>
+                <label for="location_debut" style="font-size:12px;" data-en="Rental from">Location du</label>
                 <input type="date" id="location_debut" name="location_debut">
               </div>
               <div>
-                <label for="location_fin" style="font-size:12px;">Au</label>
+                <label for="location_fin" style="font-size:12px;" data-en="To">Au</label>
                 <input type="date" id="location_fin" name="location_fin">
               </div>
             </div>
-            <p class="field-error" id="error-location-dates">Indiquez les dates de début et de fin de location.</p>
+            <p class="field-error" id="error-location-dates" data-en="Please provide the start and end dates for the rental.">Indiquez les dates de début et de fin de location.</p>
           </div>
 
           <label class="check-option">
             <input type="checkbox" name="services[]" value="Activité">
-            <span class="co-title">Activité</span>
+            <span class="co-title" data-en="Activity">Activité</span>
           </label>
 
           <label class="check-option">
             <input type="checkbox" name="services[]" value="Hôtel">
-            <span class="co-title">Hôtel</span>
+            <span class="co-title" data-en="Hotel">Hôtel</span>
           </label>
 
           <label class="check-option">
             <input type="checkbox" name="services[]" value="Transfert (Moroni)" id="check-transfert">
-            <span class="co-title">Transfert (Moroni)</span>
+            <span class="co-title" data-en="Transfer (Moroni)">Transfert (Moroni)</span>
           </label>
 
           <label class="check-option">
             <input type="checkbox" name="services[]" value="Bien à distance" id="check-bien-distance">
-            <span class="co-title">Bien à distance</span>
+            <span class="co-title" data-en="Remote property care">Bien à distance</span>
           </label>
           <div class="sub-field">
             <select id="prestation_bien_distance" name="prestation_bien_distance">
-              <option value="">Quelle prestation souhaitez-vous ?</option>
-              <option value="Visite simple">Visite simple (ouverture + vérification)</option>
-              <option value="Visite + ménage">Visite + ménage</option>
-              <option value="Formule mensuelle">Formule mensuelle (visites régulières)</option>
-              <option value="Formule bimestrielle">Formule bimestrielle (visites régulières)</option>
-              <option value="Autre">Autre / à discuter</option>
+              <option value="" data-en="Which service would you like?">Quelle prestation souhaitez-vous ?</option>
+              <option value="Visite simple" data-en="Simple visit (opening + check)">Visite simple (ouverture + vérification)</option>
+              <option value="Visite + ménage" data-en="Visit + cleaning">Visite + ménage</option>
+              <option value="Formule mensuelle" data-en="Monthly plan (regular visits)">Formule mensuelle (visites régulières)</option>
+              <option value="Formule bimestrielle" data-en="Bi-monthly plan (regular visits)">Formule bimestrielle (visites régulières)</option>
+              <option value="Autre" data-en="Other / to discuss">Autre / à discuter</option>
             </select>
-            <p class="field-error" id="error-bien-distance">Précisez la prestation souhaitée.</p>
+            <p class="field-error" id="error-bien-distance" data-en="Please specify the service you'd like.">Précisez la prestation souhaitée.</p>
           </div>
         </div>
       </div>
 
       <div>
-        <label>Besoins spécifiques</label>
+        <label data-en="Specific needs">Besoins spécifiques</label>
         <div class="check-group">
           <label class="check-option">
             <input type="checkbox" name="equipements[]" value="Siège auto bébé">
-            <span class="co-title">Siège auto bébé</span>
+            <span class="co-title" data-en="Baby car seat">Siège auto bébé</span>
           </label>
           <label class="check-option">
             <input type="checkbox" name="equipements[]" value="Fauteuil roulant">
-            <span class="co-title">Fauteuil roulant</span>
+            <span class="co-title" data-en="Wheelchair">Fauteuil roulant</span>
           </label>
         </div>
       </div>
 
       <div>
-        <label for="hebergement">Adresse d'arrivée (hôtel, Airbnb ou logement personnel)</label>
-        <input type="text" id="hebergement" name="hebergement" placeholder="Nom et adresse de votre logement, n'importe où dans le pays">
+        <label for="hebergement" data-en="Arrival address (hotel, Airbnb or personal home)">Adresse d'arrivée (hôtel, Airbnb ou logement personnel)</label>
+        <input type="text" id="hebergement" name="hebergement" placeholder="Nom et adresse de votre logement, n'importe où dans le pays" data-en-placeholder="Name and address of your accommodation, anywhere in the country">
       </div>
 
       <div>
-        <label for="personnes">Nombre de personnes</label>
+        <label for="personnes" data-en="Number of people">Nombre de personnes</label>
         <input type="number" id="personnes" name="personnes" min="1" value="1" required>
       </div>
-      <p class="form-note" style="margin-top:-10px;">Besoin non listé ici ? Écrivez-nous directement à <a href="mailto:contact@hzconciergerie.com" style="color:var(--accent);">contact@hzconciergerie.com</a>.</p>
+      <p class="form-note" style="margin-top:-10px;" data-en-html="Need something not listed here? Email us directly at <a href='mailto:contact@hzconciergerie.com' style='color:var(--accent);'>contact@hzconciergerie.com</a>.">Besoin non listé ici ? Écrivez-nous directement à <a href="mailto:contact@hzconciergerie.com" style="color:var(--accent);">contact@hzconciergerie.com</a>.</p>
 
       <div>
-        <label for="message">Précisions utiles (optionnel)</label>
-        <textarea id="message" name="message" placeholder="Horaires particuliers, nombre de bagages, demandes spécifiques..."></textarea>
+        <label for="message" data-en="Useful details (optional)">Précisions utiles (optionnel)</label>
+        <textarea id="message" name="message" placeholder="Horaires particuliers, nombre de bagages, demandes spécifiques..." data-en-placeholder="Specific timings, luggage, special requests..."></textarea>
       </div>
 
-      <button type="submit">Envoyer la demande</button>
-      <p class="form-note">Nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
+      <button type="submit" data-en="Send request">Envoyer la demande</button>
+      <p class="form-note" data-en="We'll send you a quote as soon as possible, by email or WhatsApp.">Nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
     </form>
   </div>
 
   <div id="success">
-    <h2>Demande envoyée</h2>
-    <p>Merci — nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
+    <h2 data-en="Request sent">Demande envoyée</h2>
+    <p data-en="Thank you — we'll send you a quote as soon as possible, by email or WhatsApp.">Merci — nous vous envoyons le devis dans les plus brefs délais, par email ou WhatsApp.</p>
   </div>
 </div>
 
 <script>
+  // Language switcher
+  const langButtons = document.querySelectorAll('#lang-switch button');
+  function setLanguage(lang) {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      if (!el.dataset.frBackup) el.dataset.frBackup = el.textContent;
+      el.textContent = lang === 'en' ? el.dataset.en : el.dataset.frBackup;
+    });
+    document.querySelectorAll('[data-en-html]').forEach(el => {
+      if (!el.dataset.frBackupHtml) el.dataset.frBackupHtml = el.innerHTML;
+      el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.frBackupHtml;
+    });
+    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+      if (!el.dataset.frBackupPlaceholder) el.dataset.frBackupPlaceholder = el.placeholder;
+      el.placeholder = lang === 'en' ? el.dataset.enPlaceholder : el.dataset.frBackupPlaceholder;
+    });
+    document.documentElement.lang = lang;
+    langButtons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  }
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
+
   const buttons = document.querySelectorAll('#theme-switch button');
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
